@@ -8,7 +8,7 @@ from collections import OrderedDict
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
-from config import DECAY_BASE_INTERVAL, ZONE_HEIGHT, ZONE_WIDTH
+from config import DECAY_BASE_INTERVAL, GRAVITY_INTERVAL, ZONE_HEIGHT, ZONE_WIDTH
 
 
 @dataclass
@@ -29,6 +29,7 @@ class Zone:
     piece_queue: list[str] = field(default_factory=list)
     active_piece: Optional[Piece] = None
     lock_delay_counter: int = 0
+    gravity_counter: int = GRAVITY_INTERVAL
     decay_timer: int = 0
     decay_interval: float = DECAY_BASE_INTERVAL
     survival_start: float = field(default_factory=time.time)

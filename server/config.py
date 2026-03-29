@@ -11,6 +11,9 @@ ZONE_HEIGHT: int = 20
 ATTACK_RANGE: int = 2
 ATTACK_CONTROL_TICKS: int = 50  # 2.5 sec at 20 tps
 
+# Gravity: piece drops one row every N ticks (20 ticks = 1 sec)
+GRAVITY_INTERVAL: int = 15  # drop every 0.75 sec
+
 # Lock delay before piece locks after landing
 LOCK_DELAY_TICKS: int = 10  # 0.5 sec at 20 tps
 

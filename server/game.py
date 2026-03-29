@@ -14,6 +14,7 @@ from config import (
     ATTACK_RANGE,
     DECAY_ACCELERATION,
     DECAY_BASE_INTERVAL,
+    GRAVITY_INTERVAL,
     LOCK_DELAY_TICKS,
     PREVIEW_COUNT,
     TICK_RATE,
@@ -241,18 +242,29 @@ class GameManager:
     # ------------------------------------------------------------------
 
     def _apply_gravity(self, zone: Zone) -> None:
-        """Move the active piece down by one row (gravity)."""
+        """Move the active piece down by one row on a timer."""
         piece = zone.active_piece
         if piece is None:
             return
 
+        # Only drop when gravity counter hits zero
+        zone.gravity_counter -= 1
+        if zone.gravity_counter > 0:
+            # Still waiting — but check lock delay if resting
+            below = Piece(piece.piece_type, piece.rotation, piece.x, piece.y + 1)
+            if check_collision(zone.grid, below):
+                zone.lock_delay_counter -= 1
+                if zone.lock_delay_counter <= 0:
+                    self._lock_and_spawn(zone)
+            return
+
+        zone.gravity_counter = GRAVITY_INTERVAL
+
         below = Piece(piece.piece_type, piece.rotation, piece.x, piece.y + 1)
         if not check_collision(zone.grid, below):
             zone.active_piece = below
-            # Piece is still falling, reset lock delay
             zone.lock_delay_counter = LOCK_DELAY_TICKS
         else:
-            # Piece is resting on something; decrement lock delay
             zone.lock_delay_counter -= 1
             if zone.lock_delay_counter <= 0:
                 self._lock_and_spawn(zone)

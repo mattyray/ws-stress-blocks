@@ -17,3 +17,12 @@ services:
     depends_on:
       - server
     restart: unless-stopped
+
+  bots:
+    build: ./server
+    command: ["python", "-u", "bots.py", "4", "ws://server:34197/ws"]
+    volumes:
+      - ./server:/app
+    depends_on:
+      - server
+    restart: unless-stopped
