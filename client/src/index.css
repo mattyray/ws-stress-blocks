@@ -1,0 +1,160 @@
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #0f0f23;
+  color: #ffffff;
+  font-family: "Courier New", Courier, monospace;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+}
+
+canvas {
+  display: block;
+}
+
+/* Overlay screens (landing, death) */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f0f23;
+  z-index: 100;
+}
+
+.overlay-box {
+  text-align: center;
+  padding: 40px 60px;
+  border: 2px solid #e94560;
+  background: rgba(15, 15, 35, 0.95);
+  max-width: 500px;
+  width: 90%;
+}
+
+.title {
+  font-size: 36px;
+  letter-spacing: 6px;
+  color: #e94560;
+  text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+  margin-bottom: 8px;
+}
+
+.death-title {
+  animation: flicker 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hint {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.6;
+}
+
+.hint.small {
+  font-size: 11px;
+  color: #555;
+  margin-top: 20px;
+}
+
+.spacer {
+  height: 24px;
+}
+
+/* Stats on death screen */
+.stats {
+  text-align: left;
+  display: inline-block;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 6px 0;
+  border-bottom: 1px solid #1a1a2e;
+}
+
+.stat-label {
+  color: #888;
+  font-size: 14px;
+}
+
+.stat-value {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding: 12px 32px;
+  border: 2px solid;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.15s, color 0.15s;
+  background: transparent;
+}
+
+.btn-primary {
+  color: #e94560;
+  border-color: #e94560;
+}
+
+.btn-primary:hover {
+  background: #e94560;
+  color: #0f0f23;
+}
+
+.btn-secondary {
+  color: #555;
+  border-color: #333;
+}
+
+.btn-secondary:hover {
+  background: #333;
+  color: #fff;
+}
+
+.btn-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
